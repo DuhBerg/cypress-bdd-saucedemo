@@ -4,6 +4,7 @@ Quando digito usuario e senha e clica em login
 Então vejo a tela iniciar home logado
 */
 
+
 describe('Login', () => {
   context('Dado que acesso a página de login', () => {
     beforeEach(() => {
@@ -21,5 +22,18 @@ describe('Login', () => {
           cy.get('.app_logo')
         })
     })
+
+    context('Quando digito usuário e senha incorreta e clico em login', () => {
+      beforeEach(() => {
+        cy.get('[data-test="username"]').type('standard_user')
+        cy.get('[data-test="password"]').type('senha_incorreta')
+        cy.get('[data-test="login-button"]').click()
+      })
+
+        it('Então recebo mensagem de erro', () => {
+          cy.get('[data-test="error"]').should('be.visible')
+        })
+    })
+
   })
 })
